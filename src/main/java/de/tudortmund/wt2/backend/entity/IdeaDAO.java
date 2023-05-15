@@ -1,7 +1,5 @@
 package de.tudortmund.wt2.backend.entity;
 
-import de.tudortmund.wt2.backend.constant.UserType;
-import jakarta.annotation.Nullable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,15 +11,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.sql.Timestamp;
 import java.util.UUID;
-
 @Entity
-@Table(name = "users_table")
+@Table(name = "ideas_table")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDAO {
+public class IdeaDAO {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @GenericGenerator(
@@ -29,8 +27,10 @@ public class UserDAO {
             strategy = "org.hibernate.id.UUIDGenerator"
     )
     private UUID id;
-    private String username;
-    private String password;
-    private String name;
-    private UserType userType;
+    private String content;
+    private int likeCount;
+    private UUID userId;
+    private Timestamp createdAt;
+    private Timestamp lastEditedAt;
+    private boolean deleted;
 }
