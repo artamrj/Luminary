@@ -5,5 +5,7 @@ import de.tudortmund.wt2.backend.service.model.Idea;
 import java.util.List;
 
 public interface IdeaService {
-    List<Idea>  fetchAllIdeas();
+    List<Idea> fetchAllIdeas();
+
+    String createIdea(Idea idea);
 }

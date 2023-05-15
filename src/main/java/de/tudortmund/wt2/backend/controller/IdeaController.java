@@ -25,6 +25,6 @@ public class IdeaController implements IdeaBaseController{
 
     @Override
     public ResponseEntity<String> createIdea(Idea idea) {
-        return new ResponseEntity<>("Test", HttpStatus.CREATED);
+        return new ResponseEntity<>(ideaService.createIdea(idea), HttpStatus.CREATED);
     }
 }
