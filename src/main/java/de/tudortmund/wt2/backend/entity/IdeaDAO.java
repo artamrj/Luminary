@@ -32,5 +32,5 @@ public class IdeaDAO {
     private UUID userId;
     private Timestamp createdAt;
     private Timestamp lastEditedAt;
-    private boolean deleted;
+    private boolean deleted = false;
 }
