@@ -9,8 +9,8 @@ spring:
   datasource:
     url: jdbc:h2:mem:wb2
     driver-class-name: org.h2.Driver
-    username: postgres
-    password: postgres
+    username: wb2-project
+    password: wb2-project
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
