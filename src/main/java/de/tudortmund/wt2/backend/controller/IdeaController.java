@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/ideas")
@@ -26,5 +27,10 @@ public class IdeaController implements IdeaBaseController{
     @Override
     public ResponseEntity<String> createIdea(Idea idea) {
         return new ResponseEntity<>(ideaService.createIdea(idea), HttpStatus.CREATED);
+    }
+
+    @Override
+    public ResponseEntity<String> updateIdea(UUID id, Idea idea) {
+        return new ResponseEntity<>(ideaService.updateIdea(id, idea), HttpStatus.OK);
     }
 }

@@ -8,6 +8,9 @@ import de.tudortmund.wt2.backend.service.model.Idea;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -42,5 +45,18 @@ public class IdeaServiceImpl implements IdeaService{
         } catch (Exception e){
             return String.format("Somethings is wrong %s ", e);
         }
+    }
+
+    @Override
+    public String updateIdea(UUID id, Idea idea) {
+        // TODO: Set Edit Time!
+
+        IdeaDAO updated = ideaRepository.findById(id)
+                .map(fetch -> modelToDaoMapper.update(fetch, idea))
+                .orElseThrow(() -> new NoSuchElementException(String.format("No Idea with this Id(%s) founded", id)));
+
+        ideaRepository.save(updated);
+
+        return "Update was successful";
     }
 }
