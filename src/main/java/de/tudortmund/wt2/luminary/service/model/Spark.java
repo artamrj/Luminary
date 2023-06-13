@@ -1,4 +1,4 @@
-package de.tudortmund.wt2.backend.service.model;
+package de.tudortmund.wt2.luminary.service.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -13,7 +13,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Idea {
+public class Spark {
     private UUID id;
     private String content;
     private int likeCount;

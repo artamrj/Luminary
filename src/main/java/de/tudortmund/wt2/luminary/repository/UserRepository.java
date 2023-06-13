@@ -1,6 +1,6 @@
-package de.tudortmund.wt2.backend.repository;
+package de.tudortmund.wt2.luminary.repository;
 
-import de.tudortmund.wt2.backend.entity.UserDAO;
+import de.tudortmund.wt2.luminary.entity.UserDAO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

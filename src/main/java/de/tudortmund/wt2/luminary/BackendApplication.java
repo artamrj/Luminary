@@ -1,4 +1,4 @@
-package de.tudortmund.wt2.backend;
+package de.tudortmund.wt2.luminary;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

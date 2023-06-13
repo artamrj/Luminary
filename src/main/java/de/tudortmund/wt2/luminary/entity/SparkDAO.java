@@ -1,4 +1,4 @@
-package de.tudortmund.wt2.backend.entity;
+package de.tudortmund.wt2.luminary.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,7 +19,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class IdeaDAO {
+public class SparkDAO {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @GenericGenerator(
