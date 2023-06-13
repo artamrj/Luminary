@@ -16,8 +16,8 @@ public interface ModelToDaoMapper {
 
     @Mappings(value = {
             @Mapping(target = "id", ignore = true),
-            @Mapping(target = "likeCount", ignore = true),
-            @Mapping(target = "userId", ignore = true),
+            @Mapping(target = "lightCount", ignore = true),
+            @Mapping(target = "creator", ignore = true),
             @Mapping(target = "createdAt", ignore = true)
     })
     SparkDAO update(@MappingTarget SparkDAO target, Spark update);

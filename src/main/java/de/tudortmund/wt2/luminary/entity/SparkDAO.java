@@ -14,7 +14,7 @@ import org.hibernate.annotations.GenericGenerator;
 import java.sql.Timestamp;
 import java.util.UUID;
 @Entity
-@Table(name = "ideas_table")
+@Table(name = "sparks_table")
 @Data
 @Builder
 @NoArgsConstructor

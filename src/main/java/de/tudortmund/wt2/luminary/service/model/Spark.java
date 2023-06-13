@@ -16,8 +16,8 @@ import java.util.UUID;
 public class Spark {
     private UUID id;
     private String content;
-    private int likeCount;
-    private UUID userId;
+    private int lightCount;
+    private UUID creator;
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
     private LocalDateTime createdAt;
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
