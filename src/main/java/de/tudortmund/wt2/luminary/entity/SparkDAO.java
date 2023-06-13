@@ -28,8 +28,8 @@ public class SparkDAO {
     )
     private UUID id;
     private String content;
-    private int likeCount;
-    private UUID userId;
+    private int lightCount;
+    private UUID creator;
     private Timestamp createdAt;
     private Timestamp lastEditedAt;
     private boolean deleted = false;
