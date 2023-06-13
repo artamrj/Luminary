@@ -1,7 +1,6 @@
-package de.tudortmund.wt2.backend.entity;
+package de.tudortmund.wt2.luminary.entity;
 
-import de.tudortmund.wt2.backend.constant.UserType;
-import jakarta.annotation.Nullable;
+import de.tudortmund.wt2.luminary.constant.UserType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -32,5 +31,5 @@ public class UserDAO {
     private String username;
     private String password;
     private String name;
-    private UserType userType;
+    private UserType role;
 }

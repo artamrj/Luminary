@@ -1,4 +1,4 @@
-package de.tudortmund.wt2.backend.constant;
+package de.tudortmund.wt2.luminary.constant;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

@@ -1,7 +1,7 @@
 # Read Me First
 The following was discovered as part of building this project:
 
-* The original package name 'de.tu-dortmund.wt2.backend' is invalid and this project uses 'de.tudortmund.wt2.backend' instead.
+* The original package name 'de.tu-dortmund.wt2.backend' is invalid and this project uses 'de.tudortmund.wt2.luminary' instead.
 
 # Getting Started
 

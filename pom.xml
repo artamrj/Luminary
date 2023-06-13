@@ -11,8 +11,8 @@
 	<groupId>de.tu-dortmund.wt2</groupId>
 	<artifactId>backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Backend</name>
-	<description>project for WB2</description>
+	<name>Luminary</name>
+	<description>Luminary | light up your mind! (project for WB2)</description>
 	<properties>
 		<java.version>17</java.version>
 		<org.mapstruct.version>1.5.5.Final</org.mapstruct.version>

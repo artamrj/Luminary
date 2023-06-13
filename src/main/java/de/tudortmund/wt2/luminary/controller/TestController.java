@@ -1,4 +1,4 @@
-package de.tudortmund.wt2.backend.controller;
+package de.tudortmund.wt2.luminary.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
