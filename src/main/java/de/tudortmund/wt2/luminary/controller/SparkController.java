@@ -1,7 +1,7 @@
 package de.tudortmund.wt2.luminary.controller;
 
 import de.tudortmund.wt2.luminary.service.SparkService;
-import de.tudortmund.wt2.luminary.service.model.Spark;
+import de.tudortmund.wt2.luminary.model.SparkDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/sparks")
+@RequestMapping("api/sparks")
 public class SparkController implements SparkBaseController {
     private final SparkService sparkService;
 
@@ -20,17 +20,17 @@ public class SparkController implements SparkBaseController {
     }
 
     @Override
-    public ResponseEntity<List<Spark>> fetchAllIdeas() {
+    public ResponseEntity<List<SparkDto>> fetchAllSparks() {
         return new ResponseEntity<>(this.sparkService.fetchAllIdeas(), HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<String> createIdea(Spark spark) {
-        return new ResponseEntity<>(sparkService.createIdea(spark), HttpStatus.CREATED);
+    public ResponseEntity<String> createSpark(SparkDto sparkDto) {
+        return new ResponseEntity<>(sparkService.createIdea(sparkDto), HttpStatus.CREATED);
     }
 
     @Override
-    public ResponseEntity<String> updateIdea(UUID id, Spark spark) {
-        return new ResponseEntity<>(sparkService.updateIdea(id, spark), HttpStatus.OK);
+    public ResponseEntity<String> updateSpark(UUID id, SparkDto sparkDto) {
+        return new ResponseEntity<>(sparkService.updateIdea(id, sparkDto), HttpStatus.OK);
     }
 }

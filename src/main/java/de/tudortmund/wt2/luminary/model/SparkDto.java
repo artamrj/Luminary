@@ -1,4 +1,4 @@
-package de.tudortmund.wt2.luminary.service.model;
+package de.tudortmund.wt2.luminary.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -13,7 +13,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Spark {
+public class SparkDto {
     private UUID id;
     private String content;
     private int lightCount;

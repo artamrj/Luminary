@@ -1,10 +1,14 @@
 package de.tudortmund.wt2.luminary.entity.mapper;
 
 import de.tudortmund.wt2.luminary.entity.SparkDAO;
-import de.tudortmund.wt2.luminary.service.model.Spark;
+import de.tudortmund.wt2.luminary.entity.UserDAO;
+import de.tudortmund.wt2.luminary.model.SparkDto;
+import de.tudortmund.wt2.luminary.model.UserDto;
 import org.mapstruct.Mapper;
 
 @Mapper
 public interface DaoToModelMapper {
-    Spark map(SparkDAO sparkDAO);
+    SparkDto map(SparkDAO sparkDAO);
+
+    UserDto map(UserDAO userDAO);
 }

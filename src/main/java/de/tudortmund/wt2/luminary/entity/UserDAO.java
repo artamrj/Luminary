@@ -1,7 +1,9 @@
 package de.tudortmund.wt2.luminary.entity;
 
-import de.tudortmund.wt2.luminary.constant.UserType;
+import de.tudortmund.wt2.luminary.constant.UserRole;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -31,5 +33,6 @@ public class UserDAO {
     private String username;
     private String password;
     private String name;
-    private UserType role;
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
 }
