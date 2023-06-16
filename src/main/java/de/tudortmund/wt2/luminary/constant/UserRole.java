@@ -9,23 +9,22 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Getter
-public enum UserType {
+public enum UserRole {
     ADMIN(1, "admin"),
     USER(2, "user");
-    //VERIFIED(3, "verified"), we can have some verified user with blue tick like Twitter!
 
     private final int index;
     private final String type;
 
-    private static final HashMap<Integer, UserType> fromIntegerMap = new HashMap<>();
+    private static final HashMap<Integer, UserRole> fromIntegerMap = new HashMap<>();
 
     static {
-        Arrays.stream(UserType.values()).forEach( value -> {
+        Arrays.stream(UserRole.values()).forEach(value -> {
             fromIntegerMap.put(value.index, value);
         });
     }
 
-    public static Optional<UserType> fromIndex(int index){
+    public static Optional<UserRole> fromIndex(int index){
         return Optional.ofNullable(fromIntegerMap.get(index));
     }
 }
