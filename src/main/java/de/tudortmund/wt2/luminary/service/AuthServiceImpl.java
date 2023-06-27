@@ -1,11 +1,10 @@
 package de.tudortmund.wt2.luminary.service;
 
 import de.tudortmund.wt2.luminary.entity.UserDAO;
-import de.tudortmund.wt2.luminary.entity.mapper.DaoToModelMapper;
 import de.tudortmund.wt2.luminary.entity.mapper.ModelToDaoMapper;
-import de.tudortmund.wt2.luminary.model.AuthResponseDto;
-import de.tudortmund.wt2.luminary.model.LoginDto;
-import de.tudortmund.wt2.luminary.model.RegisterDto;
+import de.tudortmund.wt2.luminary.model.auth.AuthResponseDto;
+import de.tudortmund.wt2.luminary.model.auth.LoginDto;
+import de.tudortmund.wt2.luminary.model.auth.RegisterDto;
 import de.tudortmund.wt2.luminary.repository.UserRepository;
 import de.tudortmund.wt2.luminary.security.jwt.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +21,6 @@ public class AuthServiceImpl implements AuthService {
     private final JwtUtil jwtUtil;
     private final AuthenticationManager authenticationManager;
     private final ModelToDaoMapper modelToDaoMapper;
-    private final DaoToModelMapper daoToModelMapper;
 
     @Override
     public Boolean registration(RegisterDto user) {

@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,8 +31,9 @@ public class SparkDAO {
     private UUID id;
     private String content;
     private int lightCount;
-    private UUID creator;
+    @ManyToOne
+    @JoinColumn(name = "creator_id")
+    private UserDAO creator;
     private Timestamp createdAt;
     private Timestamp lastEditedAt;
-    private boolean deleted = false;
 }

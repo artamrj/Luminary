@@ -1,8 +1,8 @@
 package de.tudortmund.wt2.luminary.controller;
 
-import de.tudortmund.wt2.luminary.model.AuthResponseDto;
-import de.tudortmund.wt2.luminary.model.LoginDto;
-import de.tudortmund.wt2.luminary.model.RegisterDto;
+import de.tudortmund.wt2.luminary.model.auth.AuthResponseDto;
+import de.tudortmund.wt2.luminary.model.auth.LoginDto;
+import de.tudortmund.wt2.luminary.model.auth.RegisterDto;
 import de.tudortmund.wt2.luminary.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

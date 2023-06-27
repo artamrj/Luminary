@@ -1,4 +1,4 @@
-package de.tudortmund.wt2.luminary.model;
+package de.tudortmund.wt2.luminary.model.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,8 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RegisterDto {
+public class LoginDto {
     private String username;
     private String password;
-    private String name;
 }

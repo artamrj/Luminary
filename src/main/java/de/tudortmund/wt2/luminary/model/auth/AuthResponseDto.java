@@ -1,11 +1,11 @@
-package de.tudortmund.wt2.luminary.model;
+package de.tudortmund.wt2.luminary.model.auth;
 
 import lombok.Data;
 
 @Data
 public class AuthResponseDto {
     private String accessToken;
-    private String tokenType = "Bearer ";
+    private String tokenType = "Bearer";
 
     public AuthResponseDto (String accessToken) {
         this.accessToken = accessToken;

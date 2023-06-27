@@ -1,4 +1,4 @@
-package de.tudortmund.wt2.luminary.model;
+package de.tudortmund.wt2.luminary.model.auth;
 
 import de.tudortmund.wt2.luminary.constant.UserRole;
 import lombok.AllArgsConstructor;

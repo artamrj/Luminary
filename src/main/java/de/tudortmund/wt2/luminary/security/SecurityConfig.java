@@ -24,13 +24,13 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig {
     private final JwtAuthEntryPoint authEntryPoint;
     private final CustomUserDetailsService customUserDetailsService;
-
     private static final String[] SWAGGER_PATHS = {
             "/v3/api-docs/**",
             "/swagger-ui/**",
             "/v2/api-docs/**",
             "/swagger-resources/**"
     };
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -52,9 +52,9 @@ public class SecurityConfig {
                 .frameOptions()
                 .sameOrigin()
                 .and()
-                .httpBasic();
-
-        http.addFilterBefore(jwtAuthFilter(), UsernamePasswordAuthenticationFilter.class); 
+                .httpBasic()
+                        .and()
+                .addFilterBefore(jwtAuthFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
