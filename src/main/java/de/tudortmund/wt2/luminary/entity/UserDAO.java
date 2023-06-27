@@ -9,6 +9,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -32,9 +34,15 @@ public class UserDAO {
     )
     private UUID id;
     @Column(unique = true)
+    @Size(min = 5)
+    @NotNull
     private String username;
+    @Size(min = 5)
+    @NotNull
     private String password;
+    @NotNull
     private String name;
+    @NotNull
     @Enumerated(EnumType.STRING)
     private UserRole role;
 }

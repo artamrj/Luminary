@@ -10,7 +10,7 @@ import de.tudortmund.wt2.luminary.model.spark.SparkDto;
 import de.tudortmund.wt2.luminary.repository.SparkRepository;
 import de.tudortmund.wt2.luminary.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.Authentication;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -23,6 +23,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class SparkServiceImpl implements SparkService {
     private final SparkRepository sparkRepository;
@@ -38,49 +39,52 @@ public class SparkServiceImpl implements SparkService {
     }
 
     @Override
-    public String createSpark(String sparkContent, UserDetails authentication) {
-        if (authentication == null || !authentication.isAccountNonExpired()) {
-            throw new IllegalStateException("User not authenticated");
+    public String createSpark(String sparkContent, UserDetails authentication) throws Exception {
+        if (sparkContent.length() > 500) {
+            throw new IllegalArgumentException("Spark content cannot exceed 500 characters");
         }
 
         String username = authentication.getUsername();
         UserDAO user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
-        new SparkDto();
-        SparkDto newSpark = SparkDto.builder()
+        SparkDto newSparkDto = SparkDto.builder()
                 .content(sparkContent)
                 .creator(UserContentInfoDto.builder().username(user.getUsername()).name(user.getName()).build())
                 .build();
 
-        SparkDAO newIdea = modelToDaoMapper.map(newSpark);
         try {
-            sparkRepository.save(newIdea);
-            return "Idea sent successful!";
-        } catch (Exception e){
-            return String.format("Somethings is wrong %s ", e);
+            SparkDAO newSparkDao = modelToDaoMapper.map(newSparkDto);
+            sparkRepository.save(newSparkDao);
+
+            return "Spark created successfully!";
+        } catch (Exception e) {
+            throw new Exception("Failed to create spark. Please try again later.", e);
         }
     }
 
     @Override
-    public String updateSpark(UUID id, String newContent, UserDetails authentication) {
+    public String updateSpark(UUID id, String newContent, UserDetails authentication) throws Exception {
         SparkDAO founded = sparkRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException(String.format("No Spark with this Id(%s) founded", id)));
+                .orElseThrow(() -> new NoSuchElementException(String.format("No Spark with this ID(%s) found", id)));
 
-        String usernameOfSpark = founded.getCreator().getUsername();
+        String usernameInSpark = founded.getCreator().getUsername();
+        if (Objects.equals(authentication.getUsername(), usernameInSpark)) {
+            try {
+                SparkDAO updated = modelToDaoMapper.update(founded, newContent);
+                sparkRepository.save(updated);
 
-        if (Objects.equals(authentication.getUsername(), usernameOfSpark)){
-            SparkDAO updated = modelToDaoMapper.update(founded, newContent);
-            sparkRepository.save(updated);
-
-            return "Update was successful";
+                return "Update was successful";
+            } catch (Exception ex) {
+                throw new Exception("Failed to update Spark", ex);
+            }
         }
 
-        return "Update was not successful";
+        throw new IllegalStateException("You have no permission to edit this Spark");
     }
 
     @Override
-    public String deleteSpark(UUID id, UserDetails authentication) {
+    public String deleteSpark(UUID id, UserDetails authentication) throws Exception {
         SparkDAO foundedSpark = sparkRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException(String.format("No Spark with this Id(%s) founded", id)));
 
@@ -89,12 +93,16 @@ public class SparkServiceImpl implements SparkService {
 
         String usernameOfSpark = foundedSpark.getCreator().getUsername();
 
-        if (user.getRole() == UserRole.ADMIN || Objects.equals(user.getUsername(), usernameOfSpark)){
-            sparkRepository.delete(foundedSpark);
+        if (user.getRole() == UserRole.ADMIN || Objects.equals(user.getUsername(), usernameOfSpark)) {
+            try {
+                sparkRepository.delete(foundedSpark);
 
-            return "deleted";
+                return "Spark is deleted, successfully!";
+            } catch (Exception ex) {
+                throw new Exception("Failed to delete Spark", ex);
+            }
         }
 
-        return "cant be deleted!";
+        throw new IllegalStateException("You have no permission to delete this Spark");
     }
 }

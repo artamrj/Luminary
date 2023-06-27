@@ -9,8 +9,10 @@ import de.tudortmund.wt2.luminary.repository.UserRepository;
 import de.tudortmund.wt2.luminary.security.jwt.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -23,24 +25,43 @@ public class AuthServiceImpl implements AuthService {
     private final ModelToDaoMapper modelToDaoMapper;
 
     @Override
-    public Boolean registration(RegisterDto user) {
-        if (userRepository.existsByUsername(user.getUsername()))
-            return false;
+    public String registration(RegisterDto user) {
+        if (user.getUsername() == null || user.getPassword() == null || user.getName() == null) {
+            throw new IllegalArgumentException("Username, password and name are required.");
+        }
 
-        UserDAO newUser = modelToDaoMapper.map(user);
-        userRepository.save(newUser);
+        if (userRepository.existsByUsername(user.getUsername())) {
+            throw new IllegalArgumentException("Username is already taken.");
+        }
 
-        return true;
+        if (user.getUsername().length() < 5 || user.getPassword().length() < 5) {
+            throw new IllegalArgumentException("Username and password must have a minimum length of 5 characters.");
+        }
+
+        try {
+            UserDAO newUser = modelToDaoMapper.map(user);
+            userRepository.save(newUser);
+
+            return "User created successfully!";
+        } catch (Exception ex) {
+            throw new RuntimeException("Failed to create user.", ex);
+        }
     }
 
     @Override
-    public AuthResponseDto login(LoginDto user) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+    public AuthResponseDto login(LoginDto user) throws Exception {
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        String token = jwtUtil.generateToken(authentication);
+            String token = jwtUtil.generateToken(authentication);
 
-        return new AuthResponseDto(token);
+            return new AuthResponseDto(token);
+        } catch (AuthenticationException ex) {
+            throw new AuthenticationServiceException("Invalid username or password");
+        } catch (Exception ex) {
+            throw new Exception("Failed to Login with this user and pass.", ex);
+        }
     }
 }
