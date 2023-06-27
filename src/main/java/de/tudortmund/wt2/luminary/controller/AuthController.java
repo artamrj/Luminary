@@ -1,5 +1,6 @@
 package de.tudortmund.wt2.luminary.controller;
 
+import de.tudortmund.wt2.luminary.controller.response.ApiResponse;
 import de.tudortmund.wt2.luminary.model.auth.AuthResponseDto;
 import de.tudortmund.wt2.luminary.model.auth.LoginDto;
 import de.tudortmund.wt2.luminary.model.auth.RegisterDto;
@@ -16,17 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController implements AuthBaseController {
     private final AuthService authService;
     @Override
-    public ResponseEntity<String> registration(RegisterDto user) {
-        boolean response = authService.registration(user);
-
-        if (response)
-            return new ResponseEntity<>("User created Successfully!", HttpStatus.OK);
-
-        return new ResponseEntity<>("Username is already token!", HttpStatus.BAD_REQUEST);
+    public ResponseEntity<ApiResponse> registration(RegisterDto user) {
+        return new ApiResponse(authService.registration(user)).buildApiResponse();
     }
 
     @Override
-    public ResponseEntity<AuthResponseDto> login(LoginDto user) {
+    public ResponseEntity<AuthResponseDto> login(LoginDto user) throws Exception {
         AuthResponseDto response = authService.login(user);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
