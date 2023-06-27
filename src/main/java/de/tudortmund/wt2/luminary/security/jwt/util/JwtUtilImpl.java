@@ -59,7 +59,7 @@ public class JwtUtilImpl implements JwtUtil {
                     .parseClaimsJws(token);
             return true;
         } catch (Exception ex) {
-            throw new AuthenticationCredentialsNotFoundException("JWT was exprired or incorrect",ex.fillInStackTrace());
+            throw new AuthenticationCredentialsNotFoundException("JWT was exprired or incorrect", ex.fillInStackTrace());
         }
     }
 
@@ -73,7 +73,7 @@ public class JwtUtilImpl implements JwtUtil {
                 .setSubject(username)
                 .setIssuedAt(currentDate)
                 .setExpiration(expireDate)
-                .signWith(SignatureAlgorithm.HS256, jwtSigningKey)
+                .signWith(SignatureAlgorithm.HS512, jwtSigningKey)
                 .compact();
         log.info("Generated Token is {}", token);
 

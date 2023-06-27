@@ -1,6 +1,7 @@
 package de.tudortmund.wt2.luminary.entity;
 
 import de.tudortmund.wt2.luminary.constant.UserRole;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -30,6 +31,7 @@ public class UserDAO {
             strategy = "org.hibernate.id.UUIDGenerator"
     )
     private UUID id;
+    @Column(unique = true)
     private String username;
     private String password;
     private String name;

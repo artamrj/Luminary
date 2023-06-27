@@ -2,8 +2,8 @@ package de.tudortmund.wt2.luminary.entity.mapper;
 
 import de.tudortmund.wt2.luminary.entity.SparkDAO;
 import de.tudortmund.wt2.luminary.entity.UserDAO;
-import de.tudortmund.wt2.luminary.model.RegisterDto;
-import de.tudortmund.wt2.luminary.model.SparkDto;
+import de.tudortmund.wt2.luminary.model.auth.RegisterDto;
+import de.tudortmund.wt2.luminary.model.spark.SparkDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -16,13 +16,8 @@ import java.time.LocalDateTime;
 public interface ModelToDaoMapper {
     SparkDAO map(SparkDto sparkDto);
 
-    @Mappings(value = {
-            @Mapping(target = "id", ignore = true),
-            @Mapping(target = "lightCount", ignore = true),
-            @Mapping(target = "creator", ignore = true),
-            @Mapping(target = "createdAt", ignore = true)
-    })
-    SparkDAO update(@MappingTarget SparkDAO target, SparkDto update);
+    @Mapping(target = "content", source = "update")
+    SparkDAO update(@MappingTarget SparkDAO target, String update);
 
     UserDAO map (RegisterDto registerDto);
 

@@ -6,6 +6,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.UUID;
 
-public interface SparkRepository extends JpaRepository<SparkDAO, UUID> {
-    List<SparkDAO> findByDeletedFalse();
-}
+public interface SparkRepository extends JpaRepository<SparkDAO, UUID> {}

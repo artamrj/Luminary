@@ -1,6 +1,8 @@
 package de.tudortmund.wt2.luminary.service;
 
-import de.tudortmund.wt2.luminary.model.SparkDto;
+import de.tudortmund.wt2.luminary.model.spark.SparkDto;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 import java.util.UUID;
@@ -8,7 +10,9 @@ import java.util.UUID;
 public interface SparkService {
     List<SparkDto> fetchAllIdeas();
 
-    String createIdea(SparkDto sparkDto);
+    String createSpark(String sparkContent, UserDetails authentication);
 
-    String updateIdea(UUID id, SparkDto sparkDto);
+    String updateSpark(UUID id, String newContent, UserDetails authentication);
+
+    String deleteSpark(UUID id, UserDetails authentication);
 }
